@@ -33,9 +33,9 @@
             </div>
         </div>
         <div class="container">
-            <div class="row col-lg-6">
+            <div class="row">
                 <!--card-->
-                <div v-for="worker in workers" class="card col-lg-6 " :key="worker.name">
+                <div v-for="worker in workers" class="card col-lg-4 col-md-6 col-sm-8 col-xs-12 " :key="worker.name">
                     <h3> {{ worker.name }} </h3>
                     <p> {{worker.homeLocation}}</p>
                     <p> {{worker.phone}}</p>
@@ -47,7 +47,6 @@
 </template>
 
 <script>
-    import {mapGetters} from 'vuex'
 
     export default {
         name: "mainWorker",
@@ -55,7 +54,7 @@
             return {
                 citySelected: "",
                 monthSelected: "",
-                select: 0
+                select: 1
             }
         },
         computed: {
@@ -74,8 +73,7 @@
             },
             getMonth() {
                 return this.$store.state.months
-            },
-            ...mapGetters(['workInCity', 'workInMonth'])
+            }
         },
         methods: {
             changeSelect(value) {
@@ -100,7 +98,7 @@
 </script>
 
 <style scoped>
-    .card {
+    .card{
         margin-top: 5px;
         margin-bottom: 2px;
     }

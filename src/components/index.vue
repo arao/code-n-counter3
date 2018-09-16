@@ -2,12 +2,12 @@
     <div class="container ">
         <div class="row">
             <div class="col-lg-12 col-xl-12">
-                <button class="btn btn-info">
-                    <router-link to="/workerLogin" class="">Worker</router-link>
-                </button>
-                <button class="btn btn-info">
-                    <router-link to="/providerLogin" class="">Provider</router-link>
-                </button>
+                    <router-link to="/workerLogin" >
+                        <button class="btn btn-info">Worker</button>
+                    </router-link>
+                    <router-link to="/providerLogin" >
+                        <button class="btn btn-info">Provider</button>
+                    </router-link>
             </div>
         </div>
     </div>

@@ -22,31 +22,31 @@
             <div class="row col-lg-6">
                 <div v-if="select === 1" class="form-group " >
                         <label for="inCity">Select city (select one):</label>
-                        <select class="form-control" id="inCity" v-model="citySelected"  >
-                                <option v-for='city in getCity' :value="city" :key="city">{{city}}</option>
+                        <select class="form-control" id="inCity" v-model="citySelected" >
+                                <option v-for='(city,index) in getCity' :value="city" :key="city" :selected="index === 0">{{city}}</option>
                         </select>
                 </div>
                 <div v-if="select === 2" class="form-group ">
                     <label for="arrivingCity">Select city (select one):</label>
-                    <select class="form-control" id="arrivingCity" v-model="citySelected"  >
-                        <option v-for='city in getCity' :value="city" :key="city">{{city}}</option>
+                    <select class="form-control" id="arrivingCity" v-model="citySelected"   >
+                        <option v-for='(city,index) in getCity' :value="city" :key="city" v-bind:selected="index === 0">{{city}}</option>
                     </select>
                 </div>
                 <div v-if="select === 3" class="form-group " >
                     <label for="nearCity">Select city (select one):</label>
                     <select class="form-control" id="nearCity" v-model="citySelected"  >
-                        <option v-for='city in getCity' :value="city" :key="city">{{city}}</option>
+                        <option v-for='(city,index) in getCity' :value="city" :key="city" v-bind:selected="index === 0">{{city}}</option>
                     </select>
                 </div>
             </div>
         </div>
         <div class="container">
-            <div class="row col-lg-6">
+            <div class="row">
                 <!--card-->
-                <div v-for="worker in workers" class="card col-lg-6 " :key="worker.name">
+                <div v-for="worker in workers" class="card col-lg-4 col-md-6 col-sm-8 col-xs-12 " :key="worker.name">
                     <h3> {{ worker.name }} </h3>
-                    <p>  {{worker.homeLocation}}</p>
-                    <p>  {{worker.phone}}</p>
+                    <p> {{worker.homeLocation}}</p>
+                    <p> {{worker.phone}}</p>
                 </div>
 
             </div>
@@ -55,14 +55,13 @@
 </template>
 
 <script>
-    import { mapGetters } from 'vuex'
 
     export default {
         name: "mainProvider",
         data() {
             return {
                 citySelected : "",
-                select : 0
+                select : 1
             }
         },
         computed: {
@@ -80,8 +79,7 @@
             },
             getCity(){
                 return this.$store.state.city
-            },
-            ...mapGetters(['workerInCity', 'workerArrivingInCity', 'totalRegisteredWorkers'])
+            }
         },
         methods:{
             changeSelect(value){
@@ -96,12 +94,12 @@
                 this.$router.push('/');
             }
 
+        },
+        beforeMount() {
+            if (this.$store.state.user === undefined) {
+                this.$router.push('/');
+            }
         }
-        // beforeMount() {
-        //     if (this.$store.state.user === undefined) {
-        //         this.$router.push('/');
-        //     }
-        // }
     }
 </script>
 
